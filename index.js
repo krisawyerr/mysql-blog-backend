@@ -32,6 +32,8 @@ app.post("/api/upload", upload.single("file"), function (req, res) {
   res.status(200).json(file.filename);
 });
 
-app.listen(8800, () => {
+const PORT = process.env.DB_PORT || 5000
+
+app.listen(PORT, () => {
     console.log("connected")
 })
