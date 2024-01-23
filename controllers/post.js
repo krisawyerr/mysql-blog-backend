@@ -2,7 +2,7 @@ import { db } from "../db.js";
 import jwt from "jsonwebtoken";
 
 export const getPost = (req,res) => {
-    const q = req.query.cat ? "select * from posts where cat = ?" : "select * from posts";
+    const q = req.query.cat ? "SELECT p.id, title, 'desc', date, cat, country, username FROM posts p JOIN countries c ON p.cat = c.code JOIN users u ON u.id = p.uid where cat = ?" : "SELECT p.id, title, p.desc, date, cat, country, username FROM posts p JOIN countries c ON p.cat = c.code JOIN users u ON u.id = p.uid";
     db.query(q, [req.query.cat], (err, data) => {
         if (err) return res.send(err);
         return res.status(200).json(data);
